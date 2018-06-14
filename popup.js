@@ -1,11 +1,11 @@
 const userObject = {
   coder1: {
     name,
-    driver: true, 
+    driver: true
   },
   coder2: {
     name,
-    driver: false,
+    driver: false
   },
   intervalCount: 0,
   intervalLength: 25,
@@ -15,7 +15,7 @@ const userObject = {
   },
 
   setRole(coder, role) {
-    this[coder].driver = role === 'Driver' ? true : false;
+    this[coder].driver = role === "Driver" ? true : false;
   },
 
   setIntervalLength(num) {
@@ -27,33 +27,32 @@ const userObject = {
     this.coder2.driver = !this.coder2.driver;
     this.intervalCount++;
   }
-}
+};
 
 const handlers = {
-
-  setName(){
-    let coder1NameInput = document.getElementById('coder1NameInput').value;
-    let coder2NameInput = document.getElementById('coder2NameInput').value;
-    userObject.setName('coder1', coder1NameInput);
-    userObject.setName('coder2', coder2NameInput);
-    coder1NameInput = '';
-    coder2NameInput = '';
+  setName() {
+    let coder1NameInput = document.getElementById("coder1NameInput").value;
+    let coder2NameInput = document.getElementById("coder2NameInput").value;
+    userObject.setName("coder1", coder1NameInput);
+    userObject.setName("coder2", coder2NameInput);
+    coder1NameInput = "";
+    coder2NameInput = "";
   },
   setRole() {
-    const role1 = document.querySelector('input[name=Role1]:checked').value;
-    const role2 = document.querySelector('input[name=Role2]:checked').value;
-    userObject.setRole('coder1', role1);
-    userObject.setRole('coder2', role2);
+    const role1 = document.querySelector("input[name=Role1]:checked").value;
+    const role2 = document.querySelector("input[name=Role2]:checked").value;
+    userObject.setRole("coder1", role1);
+    userObject.setRole("coder2", role2);
   },
   setInterval() {
-    let intervalLength = document.getElementById('intervalLengthInput').value;
+    let intervalLength = document.getElementById("intervalLengthInput").value;
     userObject.setIntervalLength(intervalLength);
   }
-}
+};
 
 const view = {
   createPlanningTemplate() {
-    const body = document.getElementById('theBody');
+    const body = document.getElementById("theBody");
     const planningTemplateHtml = `<section id="planningTemplate">
       <p>Welcome to Pear Programming, where Pair Programming + Pomodoro Technique = Power Programming Productivity! Let's go over our process:</p>
       <ol>
@@ -93,7 +92,8 @@ const view = {
     </div>
     </section>`;
 
-    const timerHtml = `<div id="timer">
+    const timerHtml = `<div id="timer-container">
+    <div id="timer">
     <!-- Timer circle -->
     <div class="circle">
       <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
@@ -118,24 +118,21 @@ const view = {
     <a href="#" id="switch">Switch | </a>
     <a href="#" id="reset"> Reset</a>
     </div>
+  </div>
   </div>`;
 
-    body.insertAdjacentHTML('beforeend', planningTemplateHtml);
+    body.insertAdjacentHTML("beforeend", planningTemplateHtml);
     const firstStartButton = this.createFirstStartButton();
     body.appendChild(firstStartButton);
-    body.insertAdjacentHTML('beforeend', timerHtml);
+    body.insertAdjacentHTML("beforeend", timerHtml);
   },
 
-  createHelpDeskTemplate() {
-
-  },
-  createFeedBackTemplate() {
-
-  },
+  createHelpDeskTemplate() {},
+  createFeedBackTemplate() {},
 
   createTimerView() {
-    const body = document.getElementById('theBody');
-    const timerHtml = `<div id="timer">
+    const body = document.getElementById("theBody");
+    const timerHtml = `</div><div id="timer">
     <!-- Timer circle -->
     <div class="circle">
       <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
@@ -161,53 +158,56 @@ const view = {
     <a href="#" id="reset"> Reset</a>
     </div>
   </div>`;
-    body.insertAdjacentHTML('beforeend', timerHtml);
+    body.insertAdjacentHTML("beforeend", timerHtml);
     const resumeButton = this.createLaterStartButton();
     body.appendChild(resumeButton);
     this.firststartButtonListener();
   },
 
-  createFirstStartButton(){
+  createFirstStartButton() {
     //stuff
-    const firstStartbutton = document.createElement('button');
+    const firstStartbutton = document.createElement("button");
     firstStartbutton.className = "startButton";
     firstStartbutton.id = "startPearing";
-    firstStartbutton.textContent = 'Start Pearing';
+    firstStartbutton.textContent = "Start Pearing";
     return firstStartbutton;
   },
 
+  // Resume Pairing button
   createLaterStartButton() {
-    const startButton = document.createElement('button');
+    const startButton = document.createElement("button");
     startButton.className = "startButton";
-    startButton.textContent = 'Resume Pearing';
-    startButton.id = 'resumePearing';
-    return startButton
+    startButton.textContent = "Resume Pearing";
+    startButton.id = "resumePearing";
+    return startButton;
   },
 
-  createHelpDeskButton() {
+  createHelpDeskButton() {},
 
-  },
+  createEndPearingButton() {},
 
-  createEndPearingButton() {
-
-  },
-
-
+  // Start Pairing button
   firststartButtonListener() {
-    const firstStartButton = document.getElementById('startPearing');
-    firstStartButton.addEventListener('click', function (event) {
+    const firstStartButton = document.getElementById("startPearing");
+    const timerBox = $("#timer-container");
+    firstStartButton.addEventListener("click", function(event) {
       const elementClicked = event.target;
-      if (elementClicked.id === 'startPearing') {
+      if (elementClicked.id === "startPearing") {
         handlers.setName();
         handlers.setRole();
         handlers.setInterval();
-        document.getElementById("planningTemplate").style.display = "none"
+        document.getElementById("planningTemplate").style.display = "none";
         view.createTimerView();
+
+        // TODO: show time, hide instructions
+        timerBox.css("display", "block");
+        timerBox.show();
+
         console.log(userObject);
       }
     });
   }
-}
+};
 
 view.createPlanningTemplate();
 // view.createFirstStartButton();
