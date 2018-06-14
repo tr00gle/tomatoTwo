@@ -11,6 +11,12 @@
   },
   "permissions": ["storage", "notifications"],
   "web_accessible_resources": ["icon48.png"],
+  "content_scripts": [
+    {
+      "js": ["jquery.min.js"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

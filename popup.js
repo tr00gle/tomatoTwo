@@ -189,6 +189,15 @@ const view = {
 
   // Start Pairing button
   firststartButtonListener() {
+    window.onload = function() {
+      if (window.jQuery) {
+        // jQuery is loaded
+        alert("Yeah! jQuery works.");
+      } else {
+        // jQuery is not loaded
+        alert("jQuery doesn't work!");
+      }
+    };
     const firstStartButton = document.getElementById("startPearing");
     const timerBox = $("#timer-container");
     firstStartButton.addEventListener("click", function(event) {
@@ -198,11 +207,13 @@ const view = {
         handlers.setRole();
         handlers.setInterval();
         document.getElementById("planningTemplate").style.display = "none";
-        view.createTimerView();
+        // view.createTimerView();
 
         // TODO: show timer, hide instructions
-        // timerBox.css("display", "block");
-        // timerBox.show();
+        console.log(timerBox);
+
+        timerBox.css("display", "block");
+        timerBox.show();
 
         console.log(userObject);
       }
