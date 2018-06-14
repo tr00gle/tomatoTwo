@@ -76,7 +76,7 @@ const view = {
       </ol>
       <p>Before we get started, let's <span id="emphatic">plan</span> our work! Did you plan it? Are you sure? You're totally sure you have a plan? Ok, maybe go check once more. If you're not sure, here's this lovely quote from Abraham Lincoln about planning your work:</p>
       <p id="quote">"Give me six hours to chop down a tree and I will spend the first four sharpening the axe." - Abraham Lincoln</p>
-      <p>What are your names?</p>
+      <p>Sooooooooo.....what are your names?</p>
 
       <div>
         <input id="coder1NameInput" type="text" name="Coder1" placeholder="Coder 1" autofocus>
@@ -96,6 +96,9 @@ const view = {
     body.appendChild(firstStartButton);
   },
 
+  createHelpDeskTemplate() {
+
+  },
   createFeedBackTemplate() {
 
   },
@@ -112,6 +115,7 @@ const view = {
     const startButton = document.createElement('button');
     startButton.className = "startButton";
     startButton.textContent = 'Resume Pearing';
+    startButton.id = 'resumePearing';
     return startButton
   },
 
@@ -130,4 +134,4 @@ const view = {
 }
 
 view.createFirstStartButton();
-view.createPlanningTemplate();
+//view.createPlanningTemplate();

@@ -11,6 +11,7 @@ span {
 input {
   font-family: courier;
   color: grey;
+  outline: none;
 }
 
 button {
