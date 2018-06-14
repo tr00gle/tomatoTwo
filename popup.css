@@ -1,8 +1,18 @@
 body {
   height: 550px;
   width: 600px;
+  font-family: courier;
 }
 
 span {
   font-weight: bold;
+}
+
+input {
+  font-family: courier;
+  color: grey;
+}
+
+button {
+  font-family: courier;
 }
