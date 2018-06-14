@@ -132,7 +132,7 @@ const view = {
 
   createTimerView() {
     const body = document.getElementById("theBody");
-    const timerHtml = `</div><div id="timer">
+    const timerHtml = `<div id="timer-container"></div><div id="timer">
     <!-- Timer circle -->
     <div class="circle">
       <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
@@ -157,6 +157,7 @@ const view = {
     <a href="#" id="switch">Switch | </a>
     <a href="#" id="reset"> Reset</a>
     </div>
+  </div>
   </div>`;
     body.insertAdjacentHTML("beforeend", timerHtml);
     const resumeButton = this.createLaterStartButton();
@@ -199,9 +200,9 @@ const view = {
         document.getElementById("planningTemplate").style.display = "none";
         view.createTimerView();
 
-        // TODO: show time, hide instructions
-        timerBox.css("display", "block");
-        timerBox.show();
+        // TODO: show timer, hide instructions
+        // timerBox.css("display", "block");
+        // timerBox.show();
 
         console.log(userObject);
       }
