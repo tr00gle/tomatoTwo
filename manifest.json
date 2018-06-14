@@ -6,8 +6,8 @@
   "author": "Erik Cox and Ryan Trontz",
 
   "browser_action": {
-    "default_title": "Pair Programming",
-    "default_popup": "timer.html"
+    "default_title": "Pear Programming",
+    "default_popup": "popup.html"
   },
   "permissions": ["storage", "notifications"],
   "web_accessible_resources": ["icon48.png"],

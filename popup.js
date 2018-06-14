@@ -54,7 +54,7 @@ const handlers = {
 const view = {
   createPlanningTemplate() {
     const body = document.getElementById('theBody');
-    const planningTemplateHtml = `<section>
+    const planningTemplateHtml = `<section id="planningTemplate">
       <p>Welcome to Pear Programming, where Pair Programming + Pomodoro Technique = Power Programming Productivity! Let's go over our process:</p>
       <ol>
         <li>
@@ -85,15 +85,45 @@ const view = {
     <div>
                 <div>
                   <input id="coder2NameInput" type="text" name="Coder2" placeholder="Coder 2">
-                    <input type="radio" name="Role2" value="Driver" checked>Driver
-      <input type="radio" name="Role2" value="Navigator">Navigator
+                    <input type="radio" name="Role2" value="Driver">Driver
+      <input type="radio" name="Role2" value="Navigator" checked>Navigator
     </div>
                       <div>
                         <input id="intervalLengthInput" type="number" name="timer-interval" placeholder="25">
-    </div>`;
+    </div>
+    </section>`;
+
+    const timerHtml = `<div id="timer">
+    <!-- Timer circle -->
+    <div class="circle">
+      <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(110,110)">
+          <circle r="100" class="e-c-base" />
+          <g transform="rotate(-90)">
+            <circle r="100" class="e-c-progress" />
+            <g id="e-pointer">
+              <circle cx="100" cy="0" r="8" class="e-c-pointer" />
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <!-- Timer controls -->
+    <div class="controlls">
+      <div class="display-remain-time">00:30</div>
+      <button class="play" id="pause"></button>
+    </div>
+  </div>
+  <div id="buttons">
+    <a href="#" id="switch">Switch | </a>
+    <a href="#" id="reset"> Reset</a>
+    </div>
+  </div>`;
+
     body.insertAdjacentHTML('beforeend', planningTemplateHtml);
     const firstStartButton = this.createFirstStartButton();
     body.appendChild(firstStartButton);
+    body.insertAdjacentHTML('beforeend', timerHtml);
   },
 
   createHelpDeskTemplate() {
@@ -102,11 +132,46 @@ const view = {
   createFeedBackTemplate() {
 
   },
+
+  createTimerView() {
+    const body = document.getElementById('theBody');
+    const timerHtml = `<div id="timer">
+    <!-- Timer circle -->
+    <div class="circle">
+      <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(110,110)">
+          <circle r="100" class="e-c-base" />
+          <g transform="rotate(-90)">
+            <circle r="100" class="e-c-progress" />
+            <g id="e-pointer">
+              <circle cx="100" cy="0" r="8" class="e-c-pointer" />
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <!-- Timer controls -->
+    <div class="controlls">
+      <div class="display-remain-time">00:30</div>
+      <button class="play" id="pause"></button>
+    </div>
+  </div>
+  <div id="buttons">
+    <a href="#" id="switch">Switch | </a>
+    <a href="#" id="reset"> Reset</a>
+    </div>
+  </div>`;
+    body.insertAdjacentHTML('beforeend', timerHtml);
+    const resumeButton = this.createLaterStartButton();
+    body.appendChild(resumeButton);
+    this.firststartButtonListener();
+  },
+
   createFirstStartButton(){
     //stuff
     const firstStartbutton = document.createElement('button');
     firstStartbutton.className = "startButton";
-    firstStartbutton.id = "firstStartButton";
+    firstStartbutton.id = "startPearing";
     firstStartbutton.textContent = 'Start Pearing';
     return firstStartbutton;
   },
@@ -119,19 +184,31 @@ const view = {
     return startButton
   },
 
+  createHelpDeskButton() {
+
+  },
+
+  createEndPearingButton() {
+
+  },
+
+
   firststartButtonListener() {
-    const firstStartButton = document.getElementById('firstStartButton');
-    button.addEventListener('click', function (event) {
+    const firstStartButton = document.getElementById('startPearing');
+    firstStartButton.addEventListener('click', function (event) {
       const elementClicked = event.target;
       if (elementClicked.id === 'startPearing') {
         handlers.setName();
         handlers.setRole();
         handlers.setInterval();
+        document.getElementById("planningTemplate").style.display = "none"
+        view.createTimerView();
         console.log(userObject);
       }
     });
   }
 }
 
-view.createFirstStartButton();
-//view.createPlanningTemplate();
+view.createPlanningTemplate();
+// view.createFirstStartButton();
+view.firststartButtonListener();
