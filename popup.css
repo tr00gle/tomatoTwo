@@ -2,3 +2,7 @@ body {
   height: 550px;
   width: 600px;
 }
+
+span {
+  font-weight: bold;
+}
