@@ -131,28 +131,28 @@ const view = {
   const helpDeskTemplateHtml = `
     <div id="helpDeskTemplateHtml"><h2>Let&#146s Get Unstuck Together!</h2>
 <h3>Never let go, Jack! Help has arrived!</h3>
-<p>So, you think you&#146re stuck, eh? Well, as you requested, we&#146ve called for help, and here is. Say it together now…Rubber duckie, you&#146re the one…</p>
+<p>So, you think you&#146re stuck, eh? Well, as you requested, we&#146ve called for help, and here is. Say it together now! Rubber duckie, you&#146re the one…</p>
 <ol start="1"><li>What seems to be the problem?
 </li><li>What exactly did you expect to happen?
 </li><li>What have you tried to fix it?
-</li><li>Why do you suspect it’s still not working?
+</li><li>Why do you suspect it&#146s still not working?
 </li></ol></div>
 `;
 
     const feedBackTemplateHtml = `<div id="feedbackTemplateHtml">
-    <h3>It’s time to branch out and give some feedback!</h3>
+    <h3>It&#146s time to branch out and give some feedback!</h3>
 <h4>Me:</h4>
-<ol start="1"><li>I think I did this well…
-</li><li>I think I could Improve…
+<ol start="1"><li>I think I did this well:
+</li><li>I think I could Improve:
 </li><li>On a scale of 1(I did nothing) to 10(I bulldozed our pear orchard), I was a (blank) today.
 </li></ol>
 
 <h4>You:</h4>
-<ol start="1"><li>I think you did this well…
-</li><li>I think you could improve on…
+<ol start="1"><li>I think you did this well:
+</li><li>I think you could improve on:
 </li><li>I agree/disagree with where you rated your contribution today. Here&#146s why :)
-</li><li>I think you could do this to make our learning experience better…
-</li><li>I learned this from you today…
+</li><li>I think you could do this to make our learning experience better:
+</li><li>I learned this from you today:
 </li></ol>
 
 <h4>We: how do we feel about how our tree of knowledge grew today? </h4></div>
@@ -268,7 +268,7 @@ const view = {
         handlers.setRole();
         handlers.setInterval();
         document.getElementById("planningTemplate").style.display = "none";
-        document.getElementById('startPearing').style.display = "none";
+        // document.getElementById('startPearing').style.display = "none";
         // document.getElementById('timer-container').style.display = 'block';
         document.getElementById('feedbackTemplateHtml');
         document.getElementById('helpDeskTemplateHtml');
@@ -277,13 +277,15 @@ const view = {
         //timerBox.css("display", "block");
         console.log(typeof timerBox.show)
         timerBox.show();
+        feedbackBox.hide();
+        helpBox.hide();
       } 
     });
   },
 
   helpButtonListener() {
-    const planning = document.getElementById("planningTemplate")
-    const timer = document.getElementById('timer-container')
+    const planning = document.getElementById("planningTemplate");
+    const timer = document.getElementById('timer-container');
     const feedback = document.getElementById('feedbackTemplateHtml');
     const helpDesk = $("#helpDeskTemplateHtml");
     const helpButton = document.getElementById("helpDesk");
@@ -292,12 +294,29 @@ const view = {
       if (elementClicked.id === 'helpDesk') {
         helpDesk.css("display", "block");
         helpDesk.show();
-        planning.css("display", "none");
-        timer.css("display", "none");
-        feedback.hide();
+        planning.style.display = "none";
+        timer.style.display = "none";
+        feedback.style.display = "none";
       }
     })
   },
+
+  feedbackButtonListener() {
+    const feedback = document.getElementById('feedbackTemplateHtml');
+    const feedbackButton = document.getElementById('feedback');
+    const helpDesk = $("#helpDeskTemplateHtml");
+    const planning = document.getElementById("planningTemplate");
+    const timer = document.getElementById('timer-container');
+    feedbackButton.addEventListener('click', function(event) {
+      const elementClicked = event.target;
+      if(elementClicked.id === 'feedback') {
+        feedback.style.display = "block";
+        helpDesk.hide();
+        timer.style.display = "none";
+        planning.style.display = "none";
+      }
+    })
+  }
 
 };
 
@@ -305,3 +324,4 @@ view.createPlanningTemplate();
 // view.createFirstStartButton();
 view.firststartButtonListener();
 view.helpButtonListener();
+view.feedbackButtonListener();
