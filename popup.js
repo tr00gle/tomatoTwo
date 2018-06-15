@@ -121,14 +121,53 @@ const view = {
   </div>
   </div>`;
 
-    body.insertAdjacentHTML("beforeend", planningTemplateHtml);
-    const firstStartButton = this.createFirstStartButton();
-    body.appendChild(firstStartButton);
-    body.insertAdjacentHTML("beforeend", timerHtml);
-  },
+  const helpDeskTemplateHtml = `
+    <div id="helpDeskTemplateHtml"><h2>Let’s Get Unstuck Together!</h2>
+<h3>Never let go, ${userObject.coder1.name} and ${userObject.coder2.name}. Help has arrived!</h3>
+<p>So, you think you’re stuck, eh? Well, as you requested, we’ve called for help, and here is. Say it together now…Rubber duckie, you’re the one…</p>
+<ol start="1"><li>What seems to be the problem?
+</li><li>What exactly did you expect to happen?
+</li><li>What have you tried to fix it?
+</li><li>Why do you suspect it’s still not working?
+</li></ol></div>
+`;
 
-  createHelpDeskTemplate() {},
-  createFeedBackTemplate() {},
+    const feedBackTemplateHtml = `<div id="feedbackTemplateHtml">
+    <h3>It’s time to branch out and give some feedback!</h3>
+<h4>Me:</h4>
+<ol start="1"><li>I think I did this well…
+</li><li>I think I could Improve…
+</li><li>On a scale of 1(I did nothing) to 10(I bulldozed our pear orchard), I was a (blank) today.
+</li></ol>
+
+<h4>You:</h4>
+<ol start="1"><li>I think you did this well…
+</li><li>I think you could improve on…
+</li><li>I agree/disagree with where you rated your contribution today. Here’s why :)
+</li><li>I think you could do this to make our learning experience better…
+</li><li>I learned this from you today…
+</li></ol>
+
+<h4>We: how do we feel about how our tree of knowledge grew today? </h4></div>
+`;
+
+    body.insertAdjacentHTML("beforeend", planningTemplateHtml);
+    body.insertAdjacentHTML("beforeend", timerHtml);  
+    body.insertAdjacentHTML("beforeend", helpDeskTemplateHtml);
+    body.insertAdjacentHTML("beforeend", feedBackTemplateHtml);
+
+    //document.getElementById("planningTemplate").style.display = "none"; 
+
+    const firstStartButton = this.createFirstStartButton();
+    const resumePearingButton = this.createLaterStartButton();
+    const helpDeskButton = this.createHelpDeskButton();    
+    const feedbackButton = this.createFeedbackButton();
+
+    body.appendChild(firstStartButton);
+    body.appendChild(resumePearingButton);
+    body.appendChild(helpDeskButton);
+    body.appendChild(feedbackButton);
+  },
 
   createTimerView() {
     const body = document.getElementById("theBody");
@@ -161,7 +200,11 @@ const view = {
   </div>`;
     body.insertAdjacentHTML("beforeend", timerHtml);
     const resumeButton = this.createLaterStartButton();
+    const helpDeskButton = this.createHelpDeskButton();
+    const feedbackButton = this.createFeedbackButton();
     body.appendChild(resumeButton);
+    body.appendChild(helpDeskButton);
+    body.appendChild(feedbackButton);
     this.firststartButtonListener();
   },
 
@@ -183,21 +226,25 @@ const view = {
     return startButton;
   },
 
-  createHelpDeskButton() {},
+  createFeedbackButton() {
+    const feedbackButton = document.createElement("button");
+    feedbackButton.className = "feedbackButton";
+    feedbackButton.textContent = "End Pearing";
+    feedbackButton.id = "feedback";
+    return feedbackButton;  
+  },
 
-  createEndPearingButton() {},
+  createHelpDeskButton() {
+    const helpDeskButton = document.createElement("button");
+    helpDeskButton.className = "helpDeskButton";
+    helpDeskButton.textContent = "Help Please";
+    helpDeskButton.id = "helpDesk";
+    return helpDeskButton; 
+  },
+
 
   // Start Pairing button
   firststartButtonListener() {
-    window.onload = function() {
-      if (window.jQuery) {
-        // jQuery is loaded
-        alert("Yeah! jQuery works.");
-      } else {
-        // jQuery is not loaded
-        alert("jQuery doesn't work!");
-      }
-    };
     const firstStartButton = document.getElementById("startPearing");
     const timerBox = $("#timer-container");
     firstStartButton.addEventListener("click", function(event) {
@@ -207,10 +254,9 @@ const view = {
         handlers.setRole();
         handlers.setInterval();
         document.getElementById("planningTemplate").style.display = "none";
+        document.getElementById('startPearing').style.display = "none";
+        document.getElementById('timer-container').style.display = 'block';
         // view.createTimerView();
-
-        // TODO: show timer, hide instructions
-        console.log(timerBox);
 
         timerBox.css("display", "block");
         timerBox.show();
