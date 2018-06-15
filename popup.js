@@ -130,7 +130,7 @@ const view = {
 
   const helpDeskTemplateHtml = `
     <div id="helpDeskTemplateHtml"><h2>Let’s Get Unstuck Together!</h2>
-<h3>Never let go, ${userObject.coder1.name} and ${userObject.coder2.name}. Help has arrived!</h3>
+<h3>Never let go, Jack! Help has arrived!</h3>
 <p>So, you think you’re stuck, eh? Well, as you requested, we’ve called for help, and here is. Say it together now…Rubber duckie, you’re the one…</p>
 <ol start="1"><li>What seems to be the problem?
 </li><li>What exactly did you expect to happen?
@@ -163,6 +163,10 @@ const view = {
     body.insertAdjacentHTML("beforeend", helpDeskTemplateHtml);
     body.insertAdjacentHTML("beforeend", feedBackTemplateHtml);
 
+    const feedbackBox = $("#feedbackTemplateHtml");
+    const helpBox = $("#helpDeskTemplateHtml");
+    feedbackBox.hide();
+    helpBox.hide();
     //document.getElementById("planningTemplate").style.display = "none"; 
 
     const firstStartButton = this.createFirstStartButton();
@@ -254,6 +258,9 @@ const view = {
   firststartButtonListener() {
     const firstStartButton = document.getElementById("startPearing");
     const timerBox = $("#timer-container");
+    const feedbackBox = $("#feedbackTemplateHtml");
+    const helpBox = $("#helpDeskTemplateHtml");
+    const planningBox = $("#planningTemplate");
     firstStartButton.addEventListener("click", function(event) {
       const elementClicked = event.target;
       if (elementClicked.id === "startPearing") {
@@ -264,16 +271,39 @@ const view = {
         document.getElementById('startPearing').style.display = "none";
         document.getElementById('timer-container').style.display = 'block';
         // view.createTimerView();
-
+        console.log('start button works');
         timerBox.css("display", "block");
         timerBox.show();
+      } else if (elementClicked.id === 'resumePearing') {
+        timerBox.css("display", "block");
+        timerBox.show();
+        feedbackBox.hide();
+        helpBox.hide();
+      } else if (elementClicked.id === 'helpDesk') {
+        
 
-        console.log(userObject);
+      } else if (eleementClicked.id === 'feedback') {
+
       }
     });
+  },
+
+  helpButtonListener() {
+    const helpButton = document.getElementById("helpDesk");
+    helpButton.addEventListener('click', function(event) {
+      const elementClicked = event.target;
+      if (elementClicked.id === 'helpDesk') {
+        helpBox.show();
+        helpBox.css('display', 'block');
+        timerBox.hide();
+        planningBox.hide();
+        feedbackBox.hide();
+      }
+    })
   }
 };
 
 view.createPlanningTemplate();
 // view.createFirstStartButton();
 view.firststartButtonListener();
+view.helpButtonListener();
