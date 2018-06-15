@@ -129,9 +129,9 @@ const view = {
   </div>`;
 
   const helpDeskTemplateHtml = `
-    <div id="helpDeskTemplateHtml"><h2>Let’s Get Unstuck Together!</h2>
+    <div id="helpDeskTemplateHtml"><h2>Let&#146s Get Unstuck Together!</h2>
 <h3>Never let go, Jack! Help has arrived!</h3>
-<p>So, you think you’re stuck, eh? Well, as you requested, we’ve called for help, and here is. Say it together now…Rubber duckie, you’re the one…</p>
+<p>So, you think you&#146re stuck, eh? Well, as you requested, we&#146ve called for help, and here is. Say it together now…Rubber duckie, you&#146re the one…</p>
 <ol start="1"><li>What seems to be the problem?
 </li><li>What exactly did you expect to happen?
 </li><li>What have you tried to fix it?
@@ -150,7 +150,7 @@ const view = {
 <h4>You:</h4>
 <ol start="1"><li>I think you did this well…
 </li><li>I think you could improve on…
-</li><li>I agree/disagree with where you rated your contribution today. Here’s why :)
+</li><li>I agree/disagree with where you rated your contribution today. Here&#146s why :)
 </li><li>I think you could do this to make our learning experience better…
 </li><li>I learned this from you today…
 </li></ol>
@@ -269,18 +269,14 @@ const view = {
         handlers.setInterval();
         document.getElementById("planningTemplate").style.display = "none";
         document.getElementById('startPearing').style.display = "none";
-        document.getElementById('timer-container').style.display = 'block';
+        // document.getElementById('timer-container').style.display = 'block';
         document.getElementById('feedbackTemplateHtml');
         document.getElementById('helpDeskTemplateHtml');
         // view.createTimerView();
         console.log('start button works');
-        timerBox.css("display", "block");
+        //timerBox.css("display", "block");
+        console.log(typeof timerBox.show)
         timerBox.show();
-      } else if (elementClicked.id === 'resumePearing') {
-        timerBox.css("display", "block");
-        timerBox.show();
-        feedbackBox.hide();
-        helpBox.hide();
       } 
     });
   },
@@ -303,7 +299,6 @@ const view = {
     })
   },
 
-  feedbackButton
 };
 
 view.createPlanningTemplate();
