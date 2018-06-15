@@ -270,6 +270,8 @@ const view = {
         document.getElementById("planningTemplate").style.display = "none";
         document.getElementById('startPearing').style.display = "none";
         document.getElementById('timer-container').style.display = 'block';
+        document.getElementById('feedbackTemplateHtml');
+        document.getElementById('helpDeskTemplateHtml');
         // view.createTimerView();
         console.log('start button works');
         timerBox.css("display", "block");
@@ -279,28 +281,29 @@ const view = {
         timerBox.show();
         feedbackBox.hide();
         helpBox.hide();
-      } else if (elementClicked.id === 'helpDesk') {
-        
-
-      } else if (eleementClicked.id === 'feedback') {
-
-      }
+      } 
     });
   },
 
   helpButtonListener() {
+    const planning = document.getElementById("planningTemplate")
+    const timer = document.getElementById('timer-container')
+    const feedback = document.getElementById('feedbackTemplateHtml');
+    const helpDesk = $("#helpDeskTemplateHtml");
     const helpButton = document.getElementById("helpDesk");
     helpButton.addEventListener('click', function(event) {
       const elementClicked = event.target;
       if (elementClicked.id === 'helpDesk') {
-        helpBox.show();
-        helpBox.css('display', 'block');
-        timerBox.hide();
-        planningBox.hide();
-        feedbackBox.hide();
+        helpDesk.css("display", "block");
+        helpDesk.show();
+        planning.css("display", "none");
+        timer.css("display", "none");
+        feedback.hide();
       }
     })
-  }
+  },
+
+  feedbackButton
 };
 
 view.createPlanningTemplate();
