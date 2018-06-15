@@ -320,7 +320,7 @@ const view = {
 
 };
 
-view.createPlanningTemplate();
+//view.createPlanningTemplate();
 // view.createFirstStartButton();
 view.firststartButtonListener();
 view.helpButtonListener();
