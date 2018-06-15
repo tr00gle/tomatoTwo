@@ -52,6 +52,17 @@ function timer(seconds) {
       // );
       // notification.show();
 
+      var opt = {
+        type: "basic",
+        title: "Switch roles!",
+        message: "Time's up. Switch driver and navigator.",
+        priority: 1,
+        iconUrl: "./icon16.png"
+      };
+      chrome.notifications.create(opt, function(id) {});
+
+      console.log(opt);
+
       isStarted = false;
       setterBtns.forEach(function(btn) {
         btn.disabled = false;

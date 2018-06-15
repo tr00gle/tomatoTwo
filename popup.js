@@ -35,6 +35,8 @@ const handlers = {
     let coder2NameInput = document.getElementById("coder2NameInput").value;
     userObject.setName("coder1", coder1NameInput);
     userObject.setName("coder2", coder2NameInput);
+    localStorage.setItem("coder1", coder1NameInput);
+    localStorage.setItem("coder2", coder2NameInput);
     coder1NameInput = "";
     coder2NameInput = "";
   },
@@ -63,8 +65,7 @@ const view = {
           <span>Pear Setup</span>: once your plan is all set, enter your names, and decide who will be navigator and driver first.
       </li>
         <li>
-          <span>Pear Programming</span>: after each interval (we recommend 25 minutes to start), switch roles, review your code, and take a
-         quick break. You earned it!
+          <span>Pear Programming</span>: after each interval (we recommend 25 minutes to start), switch roles, review your code, and take a quick break. You earned it!
       </li>
         <li>
           <span>Sweet sweet feedback</span>: your programming might be over, but the learning has just begun. Hit the feedback button for a sweet roadmap to problem solving nirvana.
@@ -100,7 +101,7 @@ const view = {
         <g transform="translate(110,110)">
           <circle r="100" class="e-c-base" />
           <g transform="rotate(-90)">
-            <circle r="100" class="e-c-progress" />
+            <circle r="100" class="e-c-progress" />x
             <g id="e-pointer">
               <circle cx="100" cy="0" r="8" class="e-c-pointer" />
             </g>
@@ -118,7 +119,13 @@ const view = {
     <a href="#" id="switch">Switch | </a>
     <a href="#" id="reset"> Reset</a>
     </div>
+    <div id="coder-1">
+  Driver: ${localStorage.getItem("coder1")}
   </div>
+  <div id="coder-2">
+  Navigator: ${localStorage.getItem("coder2")}
+  </div>
+    </div>
   </div>`;
 
     body.insertAdjacentHTML("beforeend", planningTemplateHtml);
@@ -189,15 +196,6 @@ const view = {
 
   // Start Pairing button
   firststartButtonListener() {
-    window.onload = function() {
-      if (window.jQuery) {
-        // jQuery is loaded
-        alert("Yeah! jQuery works.");
-      } else {
-        // jQuery is not loaded
-        alert("jQuery doesn't work!");
-      }
-    };
     const firstStartButton = document.getElementById("startPearing");
     const timerBox = $("#timer-container");
     firstStartButton.addEventListener("click", function(event) {
@@ -208,9 +206,6 @@ const view = {
         handlers.setInterval();
         document.getElementById("planningTemplate").style.display = "none";
         // view.createTimerView();
-
-        // TODO: show timer, hide instructions
-        console.log(timerBox);
 
         timerBox.css("display", "block");
         timerBox.show();
